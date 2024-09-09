@@ -1,0 +1,277 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Fundamentals of Electronics
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 1}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Linear Circuits
+
+    \begin{itemize}
+
+      \item Circuits which may contain resistors, capacitors, inductors, independent voltage sources, and/or independent current sources
+
+      \item Voltage and current equations take the form of $v(t)=V\sin(\omega t)$ and $I(t)=I\cos(\omega t + \phi)$, respectively
+
+      \item $\omega = 2\pi f$, where $f$ is $60[\si{\hertz}]$ in the United States
+
+      \item All voltages and currents across such components must be sinusoids as well
+
+        \begin{itemize}
+
+          \item $\omega$ stays the same, only the amplitudes ($V$ or $I$) and phase shifts ($\phi$) differ from component to component
+
+          \item To make a more compact representation of these values, we define a phasor, represented as:
+
+            $$V_{avg}(t)=V_{peak}\cos(\omega t + \phi)\to\hat{V}=V_{peak}\angle\phi$$
+
+          \item A phase shift with time difference $\tau$ has $\phi=\omega\tau$
+
+            \begin{itemize}
+
+              \item Note, shifted to the left would mean $\phi>0$, while shifted to the right would mean $\phi<0$
+
+            \end{itemize}
+
+          \item Since operations with phasors often involve integration, we define a root-mean square (RMS) value of a phasor, which gives us:
+
+            $$\hat{V}_1=\frac{V}{\sqrt{2}}\angle\phi$$
+
+            \begin{center}
+              and
+            \end{center}
+
+            $$\hat{V}_2=\frac{V}{\sqrt{2}}\angle-\phi$$
+
+          \item With $\hat{V}_1$ being a left-shifted phasor and $\hat{V}_2$ being a right-shifted phasor
+
+          \item The RMS is defined with:
+
+            $$V_{rms}=\sqrt{\frac{1}{T}\int_0^T(V\sin(\omega t))^2\,dt}=\frac{1}{\sqrt{2}}V$$
+
+          \item We can say $\hat{V}_1$ is leading $\hat{V}_2$ because it reaches its peak earlier (alternatively, it may be said that $\hat{V}_2$ is lagging $\hat{V}_1$)
+
+        \end{itemize}
+
+      \item Phasor Diagram:
+
+        \begin{figure}[H]
+          \centering
+          \include{Figures/PhasorDiag}
+          \caption{Sample Phasor Diagram}
+          \label{fig:1}
+        \end{figure}
+
+    \end{itemize}
+
+  \item Power
+
+    \begin{itemize}
+
+      \item $p(t)=v(t)i(t)$ represents the instantaneous power dissipated (or consumed) by a component, where $v(t)$ is the voltage drop across a component, and $i(t)$ is the current flow through a component
+
+      \item Power follows the passive sign convention, which means that it is defined by the orientation of voltage drop and current flow
+
+        \begin{itemize}
+
+            \item Current must enter the box at the positive voltage terminal to represent consumed power
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item In a given circuit, let $v(t)=V_{max}\cos(\omega t+\theta_v)$ and $i(t)=I_{max}\cos(\omega t+\theta_I)$, the instantaneous power can be represented as:
+
+    $$p(t)=V_{max}I_{max}\cos(\omega t +\theta_v)\cos(\omega t+\theta_I)$$
+    $$p(t)=\frac{V_{max}I_{max}}{2}\left[\cos(\theta_v-\theta_I)+\cos(2\omega t+\theta_v+\theta_I)\right]$$
+
+    \begin{itemize}
+
+      \item It can be observed that the average power may be expressed as:
+
+        $$p_{avg}(t)=\frac{1}{2}V_{max}I_{max}\cos(\theta_v-\theta_I)$$
+
+      \item From here, we can notice that:
+
+        $$\hat{V}=\frac{V_{max}}{\sqrt{2}}\angle\phi_v\text{ and }\hat{I}=\frac{I_{max}}{\sqrt{2}}\angle\phi_I$$
+
+      \item Thus, if we multiply the magnitudes of the two by $\cos$ of the angle difference, we get:
+
+        $$|\hat{V}||\hat{I}|\underbrace{\cos(\theta_v-\theta_I)}_{\text{power factor}}=p_{avg}$$
+
+      \item This can be written as:
+
+        $$p_{avg}=\text{Re}\left\{ \hat{V}_{rms}\hat{I}_{rms}^* \right\}=\frac{1}{2}V_{max}I_{max}\angle\theta_v-\theta_I$$
+
+      \item The reactive power, $Q$, is defined as the imaginary part:
+
+        $$Q=\text{Im}\left\{ \hat{V}_{rms}\hat{I}_{rms}^* \right\}=|\hat{V}_{rms}||\hat{I}_{rms}|\sin(\phi)$$
+
+      \item The apparent (essentially overall) power, $S$ may be written as:
+
+        $$\hat{S}=\hat{V}_{rms}\hat{I}_{rms}$$
+        $$|\hat{S}|=|\hat{V}_{rms}||\hat{I}_{rms}|$$
+
+      \item The relationship between the three powers may be expressed as shown below:
+
+        \begin{figure}[H]
+          \centering
+          \include{Figures/Power}
+          \caption{Power Relationship}
+          \label{fig:2}
+        \end{figure}
+
+      \item This lets us derive several equations\footnote{Note: from this point, the RMS subscript is dropped, as it is implied that power relationships always deal with RMS}:
+
+        $$|S|^2=P^2+Q^2$$
+        $$|\hat{S}|=|\hat{V}||\hat{I}|$$
+        $$\hat{S}=|\hat{V}||\hat{I}|\cos(\phi)+j|\hat{V}||\hat{I}|\sin(\phi)$$
+
+        \begin{itemize}
+
+          \item Although all of these are power values, each generally has its own unit (a bit illogically):
+
+            \begin{center}
+              \begin{tabular}[H]{|c|c|}
+                \hline
+                $P$ & Watts (W)\\
+                \hline
+                $Q$ & Vars\\
+                \hline
+                $S$ & Volt-Amp\`eres (VA)\\
+                \hline
+              \end{tabular}
+            \end{center}
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Given a network with $\hat{V}$ and $\hat{I}$, then:
+
+    \begin{itemize}
+
+      \item If $\hat{V}$ leads $\hat{I}$, then the power factor is lagging (current is behind the voltage), which results in:
+
+        \begin{itemize}
+
+          \item $\phi>0$
+
+          \item $P>0$
+
+          \item $Q>0$
+
+          \item Thus, real and reactive power are consumed
+
+        \end{itemize}
+
+      \item If $\hat{V}$ lags $\hat{I}$, then the power factor is leading (current is ahead of voltage), which results in:
+
+        \begin{itemize}
+
+          \item $\phi<0$
+
+          \item $P>0$
+
+          \item $Q<0$
+
+          \item Thus, real power is consumed, while reactive power is generated (or drawn)
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Given a box shown below, we can make some important derivations:
+
+    \begin{figure}[H]
+      \centering
+      \include{Figures/Lec1Network}
+      \caption{Capacitor Box}
+      \label{fig:3}
+    \end{figure}
+
+    \begin{itemize}
+
+      \item We know:
+
+        $$i(t)=C\frac{dV_c}{dt}$$
+
+      \item Given:
+
+        $$v_c(t)=V\cos(\omega t)\Rightarrow \hat{V}_c=V\angle0^{\circ}$$
+        $$i(t)=CV\omega(-\sin(\omega t)=-\omega CV\cos(\omega t-\pi/2)\Rightarrow \hat{I}=\omega CV\angle\pi/2=j\omega cV$$
+
+        \item The complex power can be defined as:
+
+          $$S=V\angle0^{\circ}(-j\omega CV)=V^2\omega C(-j)$$
+
+        \item As we know, capacitors do not consume real power, and, thus, there is only a reactive component. Thus, we say:
+
+          $$Q=-\omega CV^2$$
+
+        \item We may conclude that capacitors are sources (suppliers) of reactive power (inductors would have the opposite reaction — they would only \textit{consume} reactive power)
+
+    \end{itemize}
+
+  \item Summary
+
+    \begin{itemize}
+
+      \item In time domain:
+
+        $$v(t)=R\cdot i(t)$$
+        $$v_L(t)=L\frac{di}{dt}$$
+        $$i_C(t)=C\frac{dV_c}{dt}$$
+        
+      \item In phasor domain:
+
+        $$\hat{V}=R\cdot\hat{I}$$
+        $$\hat{V}_L=j\omega L\hat{I},\text{ current lags voltage}$$
+        $$\hat{I}_C=j\omega L\hat{V},\text{ current leads voltage}$$
+
+      \item These may be used in combination
+
+        \begin{itemize}
+
+          \item For example, given a resistor and inductor in series, we may write:
+
+            $$v(t)=i(t)\cdot R+L\frac{di}{dt}$$
+            $$\hat{V}=\hat{I}(R+j\omega L)$$
+
+        \end{itemize}
+
+      \item Instantaneous power is:
+
+        $$p(t)=v(t)i(t)=\frac{1}{2}V_{max}I_{max}\left[ \cos(\theta_v-\theta_I) +\cos(2\omega t+\theta_v+\theta_I)\right]$$
+
+        \begin{itemize}
+
+          \item Note the frequency of instantaneous power is twice that of voltage or current
+
+        \end{itemize}
+
+      $$p_{avg}=\frac{1}{2}V_{max}I_{max}\underbrace{\cos\small(\overbrace{\theta_v-\theta_I}^{\phi}\small)}_{\text{power factor}}$$
+
+    \item The units of all powers are:
+
+      $$P\to \text{Watts (W)}$$
+      $$Q\to \text{Vars}$$
+      $$S\to \text{Volt-Amp\`eres (VA)}$$
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
