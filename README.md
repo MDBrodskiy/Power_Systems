@@ -22,6 +22,7 @@
 * [**Notes**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/)
     * [**Lecture 1**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture1.pdf)
     * [**Lecture 2**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture2.pdf)
+    * [**Lecture 3**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture3.pdf)
 
 <!--
   * [**Chapter 1**](#Notes/Chapter\ 1)
