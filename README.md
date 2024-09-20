@@ -24,6 +24,8 @@
     * [**Lecture 2**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture2.pdf)
     * [**Lecture 3**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture3.pdf)
     * [**Lecture 4**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture4.pdf)
+* [**Homework**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/)
+    * [**Lecture 1**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/Homework1.pdf)
 
 <!--
   * [**Chapter 1**](#Notes/Chapter\ 1)
