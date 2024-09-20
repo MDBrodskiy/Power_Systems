@@ -1,0 +1,211 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: M. Onabajo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Homework 1}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Abur}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+    \begin{center}
+      \underline{Chapter 2}:
+    \end{center}
+
+    \setcounter{enumi}{3}
+
+  \item
+
+    First, we find the angle difference, $\phi$:
+
+    $$\phi_1=\cos^{-1}\left( .707 \right)$$
+    $$\phi_1\approx 45^{\circ}$$
+
+    From here, we find the initial load current, based on the provided load voltage and power draw:
+
+    $$V_L=440\left[ \si{\volt} \right]$$
+    $$\hat{I}_L=\frac{200\cdot10^3}{\sqrt{3}(44)(.707)}\angle-\phi_1$$
+    $$\hat{I}_L=371.19\angle -45^{\circ}$$
+
+    We know that power may be expressed as:
+
+    $$S=P+jQ$$
+
+    We find the reactive power of the load:
+
+    $$Q=P\frac{\sin(\phi_1)}{\cos(\phi_1)}=P\tan(\phi_1)$$
+    $$Q=200[\si{\kilo}\text{VAr}]$$
+
+    Adding the capacitors in parallel allows us to sum the net positive VArs:
+
+    $$Q_{net}=200-50=150[\si{\kilo}\text{VAr}]$$
+
+    The new power factor becomes:
+
+    $$\phi_2=\tan^{-1}\left(\frac{150[\si{\kilo}\text{VAr}]}{200[\si{\kilo\watt}]})=\tan^{-1}(.75)=36.87^{\circ}$$
+    $$\boxed{pf_2=\cos(36.87)=.8\text{ lagging}}$$
+
+    The current then becomes:
+
+    $$I_{L2}=\frac{200\cdot10^3}{\sqrt{3}(440)(.8)}=328.04$$
+    $$\boxed{\hat{I}_{L2}=328.04\angle -36.87^{\circ}}$$
+
+  \item
+
+    \begin{enumerate}
+
+      \item 
+
+        We begin by finding the reactive component of the load:
+
+        $$Q=P\tan(\cos^{-1}(pf))=10\tan(\cos^{-1}(.9))$$
+        $$Q=4.843[\si{\kilo}\text{VAr}]$$
+
+        Putting the components together, we get:
+
+        $$S=P+jQ$$
+        $$\boxed{S=10+4.843j[\si{\volt\ampere}]}$$
+
+      \item To find the magnitude of the current, we may use the following relation:
+
+        $$P=IV(pf)$$
+
+        We insert known values:
+
+        $$10^4=(I)(416)(.9)$$
+
+        This gives us:
+
+        $$|I|=\frac{10^4}{416(.9)}$$
+        $$\boxed{|I|=26.709[\si{\ampere}]}$$
+
+      \item Assuming $\angle I=0$, we can say:
+
+        $$\hat{I}=26.709\angle 0^{\circ}[\si{\ampere}]$$
+
+        And from this we say:
+
+        $$\hat{V}=416\angle\cos^{-1}(.9)$$
+        $$\hat{V}=416\angle 25.84^{\circ}[\si{\volt}]$$
+
+        We multiply the two together to find the power:
+
+        $$p(t)=\hat{I}\hat{V}=26.709\angle 0^{\circ}\cdot416\angle 25.84^{\circ}$$
+        $$p(t)=11.111\angle25.84^{\circ}[\si{\kilo\watt}]$$
+
+    \end{enumerate}
+
+    \setcounter{enumi}{10}
+
+  \item
+
+    The first step has us converting $\Delta$ connections to `Y' connections:
+
+    $$Z_Y=-\frac{Z_{\Delta}}{3}=-\frac{1}{3}j[\si{\ohm}$$
+    $$\hat{V}_{a''n}=\frac{\sqrt{3}}{3}\hat{V}_{ab''}\angle-30^{\circ}=\frac{\sqrt{3}}{3}\angle-30^{\circ}[\si{\volt}]$$
+
+    We may then find values for all of the voltages (only the angles change):
+
+    $$\left[ \begin{matrix} V_{a''n}\\V_{b''n}\\V_{c''n} \end{matrix}\right]=\frac{\sqrt{3}}{3}\angle\left[ \begin{matrix} -30\\-150\\90\end{matrix} \right]^{\circ}[\si{\volt}]$$
+
+      Using equivalence, we can develop a single-phase circuit as follows:
+
+      \begin{figure}[H]
+        \centering
+        \include{Figures/SinglePhaseP11}
+        \caption{Single Phase Equivalent Circuit}
+        \label{fig:1}
+      \end{figure}
+
+      We can write equations using the voltages at $a'$:
+
+      $$\frac{V_{an}-V_{a'n}}{.1j}+\frac{V_{a''n}-V_{a'n}}{.1j}+\frac{3V_{a'n}}{j}=0$$
+
+      We move $V_{a'n}$ to one side:
+
+      $$\frac{17V_{a'n}}{j}=\frac{10V_{an}}{j}+\frac{10V_{a''n}}{j}$$
+      $$V_{a'n}=\frac{10(V_{an}+V_{a''n})}{17}$$
+      $$V_{a'n}=\frac{10(1+.5-.2887j)}{17}$$
+      $$V_{a'n}=\frac{15-2.887j}{17}$$
+      $$V_{a'n}=.8824-.1698j$$
+
+      Converting back to phasor form, we find:
+
+      $$\hat{V}_{a'n}=.8986\angle-10.9^{\circ}[\si{\volt}]$$
+
+      Given that the rest of the voltages are offset by $120^{\circ}$, we may write:
+
+      $$\boxed{\left[ \begin{matrix} V_{a'n}\\V_{b'n}\\V_{c'n} \end{matrix}\right]=.8986\angle\left[ \begin{matrix} -10.9\\-130.9\\109.1\end{matrix} \right]^{\circ}}\left[ \si{\volt} \right]$$
+
+      From here, we finally find $V_{a'b'}$ since we know this is the difference between $V_{a'n}$ and $V_{b'n}$:
+
+      $$V_{a'b'}=V_{a'n}-V_{b'n}$$
+      $$V_{a'b'}=.8986\left( \angle-10.9^{\circ}-\angle-130.9^{\circ} \right)$$
+      $$V_{a'b'}=.8986\left[ (.982-.1891j)-(-.6547-.7559j)\right]$$
+      $$V_{a'b'}=.8986\left[ 1.6367+.5668j\right]$$
+      $$V_{a'b'}=1.4707+.5093j$$
+
+      And finally we convert to phasor form:
+
+      $$\boxed{\hat{V}_{a'b'}=1.5564\angle19.1^{\circ}[\si{\volt}]}$$
+
+  \item
+
+    We begin by, as always, converting to a `Y' configuration:
+
+    $$Z_C\to \frac{Z_C}{3}=-\frac{10}{3}j[\si{\ohm}]$$
+
+    This leads to a parallel combination, the equivalent impedance of which we may calculate:
+
+    $$Z_{eq}=\frac{-(10/3)(10)}{10-(10/3)}j=-5j[\si{\ohm}]$$
+
+    The circuit can then be phase-simplified by drawing:
+
+    \begin{figure}[H]
+      \centering
+      \include{Figures/SinglePhaseP12}
+      \caption{Single Phase Equivalent Circuit}
+      \label{fig:2}
+    \end{figure}
+
+    Summing impedances, the total becomes:
+
+    $$Z_t=-4j[\si{\ohm}]$$
+
+    The line current can then be calculated as:
+
+    $$I_a=\frac{1}{-4j}$$
+    $$\hat{I}_a=\frac{(1\angle0^{\circ})j}{4}$$
+    $$\boxed{\hat{I}_a=.25\angle90^{\circ}[\si{\ampere}]}$$
+
+    To find the current through a capacitor, we must find the voltage across one of load phase components:
+
+    $$V_{pha}=(-5j)(.25\angle90^{\circ})$$
+    $$V_{pha}=(-5j)(.25j)$$
+    $$\hat{V}_{pha}=1.25\angle0^{\circ}[\si{\volt}]$$
+
+    Because of the parallel nature of the capacitor-inductor network, this voltage flows into both branches. To find the current across one capacitor, we find:
+
+    $$I_{cap}=\frac{(\sqrt{3})1.25\angle0^{\circ}}{-10j}$$
+    $$I_{cap}=\frac{(\sqrt{3})1.25j}{10}$$
+    $$I_{cap}=.2165j$$
+    $$\boxed{I_{cap}=.2165\angle90^{\circ}[\si{\ampere}]}$$
+
+    The complex power of the load may be calculated by using the product of the voltage and current phasors. This gives us:
+
+    $$S=3|\hat{V}||\hat{I}|$$
+    $$S=3\left(1.25\right)\left(  .25\right)$$
+    $$\boxed{S=.9375[\si{\volt\ampere}]}$$
+
+\end{enumerate}
+
+\end{document}
+
