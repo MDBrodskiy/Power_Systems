@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Fundamentals of Electronics
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 5}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item 3-Phase Transformer Bank
+
+    \begin{itemize}
+
+      \item Consists of phases $A, B$, and $C$, each connected to a terminal, which outputs phase $a, b,$ and $c$ at a different voltage
+
+      \item Inside the ``black box'' there are transformers corresponding to each phase, but we are more interested in what occurs at the terminals
+
+    \end{itemize}
+
+  \item With two buses injecting current towards each other, we may derive some equations:
+
+    $$\hat{z}=z\angle\theta_z$$
+    $$S_{12}=(V_1\angle\theta_1)(\hat{I}_{12}^*)\quad\text{ and }\quad S_{21}=(V_2\angle\theta_2)(\hat{I}_{21}^*)$$
+
+    \begin{itemize}
+
+      \item This gives us:
+
+        $$S_{12}=\frac{V_1^2}{z}e^{j\theta_z}-\frac{V_1V_2}{z}e^{j\theta_z}e^{j\theta_{12}}$$
+        $$S_{12}=C_1-Be^{j\theta_{12}}$$
+        $$-S_{21}=-\frac{V_2^2}{z}e^{j\theta_z}+\frac{V_1V_2}{z}e^{j\theta_z}e^{-j\theta_{12}}$$
+        $$-S_{21}=C_2+Be^{-j\theta_{12}}$$
+
+      \item These equations allow us to form ``power circle'' graphs to more easily demonstrate how power is delivered from one side of a transmission line to the other
+
+      \item Real power travels long distances better than reactive power
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
