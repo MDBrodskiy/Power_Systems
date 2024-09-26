@@ -1,0 +1,113 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Fundamentals of Electronics
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 6}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Considering a network consisting of a generator, connected to a transmission network, with a distribution network:
+
+    \begin{itemize}
+
+      \item The distribution network is generally low (or lower) voltage area
+
+      \item Distribution networks are generally connected by voltage drop-down transformers
+
+      \item Regulators are implemented — essentially transformers with really small turn radii
+
+        $$\alpha\cong 10-100$$
+
+        \begin{itemize}
+
+          \item Where $\alpha$ is the turns ratio
+
+        \end{itemize}
+
+      \item For a regulator, we may write:
+
+        $$V_{a'n}=V_{an}+\Delta V_{an}$$
+
+      \item There will be a slight phase offset, which may be written as:
+
+        $$\hat{V}_2=\hat{a}\hat{V}_1=\hat{V}_1e^{j\phi}$$
+
+        \begin{itemize}
+
+          \item Where the exponential term is called a ``phase shifter''
+
+        \end{itemize}
+
+      \item A phase shifter may be drawn as follows:
+
+        \begin{figure}[H]
+          \centering
+          \include{Figures/PhaseShifter}
+          \caption{Phase Shifter Schematic}
+          \label{fig:1}
+        \end{figure}
+
+      \item Dots added to transformer diagrams indicate that certain points are at the same phase, and show orientations of windings
+
+      \item Phase shift is determined by turns ratio $\to$ small turns ratio, small shift, and vice versa (usually at most a few degrees)
+
+      \item Note that the turns ratio acts as a ``valve'' which can switch reactive power flow from one transformer to the next (for regulators)
+
+        \begin{itemize}
+
+          \item Higher turns in the second transformer would result in higher reactive power
+
+        \end{itemize}
+
+      \item The same ``valve'' logic applies to phase shifters; however, instead of affecting the reactive power this affects real power
+
+      \item In summary: Phase shifter used to change phase and modify real power flow, while regulators modify reactive power flow
+
+    \end{itemize}
+
+  \item Nominal Tap Transformer:
+
+    \begin{itemize}
+
+      \item Modeled by:
+
+        $$\left[ \begin{matrix} i_k\\i_m\end{matrix} \right]=\left[ \begin{matrix} y_t & -y_t\\ -y_t & y_t\end{matrix} \right]\left[\begin{matrix} V_k\\V_m \end{matrix}\right]$$
+
+        \begin{itemize}
+
+          \item Where:
+
+            $$y_t=\frac{1}{r+jx_t}$$
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Off-Nominal Tap Transformer:
+
+    \begin{itemize}
+
+      \item Modeled by:
+
+        $$\left[ \begin{matrix} I_1\\I_2\end{matrix} \right]=\left[ \begin{matrix} y_t/a^2 & -y_t/a\\ -y_t/a & y_t\end{matrix} \right]\left[\begin{matrix} V_1\\V_2 \end{matrix}\right]$$
+
+      \item Note that, by setting $a\to 1$, we are essentially returning to a nominal tap transformer, as the regulator component is eliminated
+
+      \item Can be thought of as a regulating transformer equivalent circuit in per-unit
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
