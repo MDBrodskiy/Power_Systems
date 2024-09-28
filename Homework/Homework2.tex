@@ -1,0 +1,196 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Abur
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Homework 2}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Abur}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+    \begin{center}
+      \underline{Chapter 5}:
+    \end{center}
+
+    \setcounter{enumi}{14}
+
+  \item We need to establish a per-unit base. We may begin by choosing $S_{b1}=30[\si{\mega\volt\ampere}]$ and $V_{b1}=13.8[\si{\volt}]$. The impedance in zone 1 will remain the same:
+
+    $$X_{s1}^{new}=X_{s1}^{old}\left( \frac{30}{30} \right)\left( \frac{13.8}{13.8} \right)^2$$
+    $$X_{s1}^{new}=.1pu$$
+
+    We adapt the other impedances accordingly:
+
+    $$X_{T1}^{new}=.1\left( \frac{30}{20} \right)\left( \frac{132}{138} \right)^2$$
+    $$X_{T1}^{new}=.1372pu$$
+
+    $$X_{T2}^{new}=.12\left( \frac{30}{15} \right)\left( \frac{138}{138} \right)^2$$
+    $$X_{T2}^{new}=.24pu$$
+
+    $$X_{s2}^{new}=.08\left( \frac{30}{20} \right)\left( \frac{138}{138} \right)^2$$
+    $$X_{s2}^{new}=.12pu$$
+
+    $$Z_{L}^{new}=(20+j100)\left( \frac{30}{138^2} \right)$$
+    $$Z_{L}^{new}=(.0315+.15753j)pu$$
+
+    The power of the motor can also be found as:
+
+    $$V_{s2}=\frac{13.8}{13.8}$$
+    $$V_{s2}=1pu$$
+    $$S_{s2}=\frac{20}{30}$$
+    $$S_{s2}=.667pu$$
+    
+    Using the obtained values, we may generate the following diagram:
+
+    \begin{figure}[H]
+      \centering
+      \include{Figures/HW2P1}
+      \caption{Impedance Diagram for Problem 1}
+      \label{fig:1}
+    \end{figure}
+
+  \item
+
+    \begin{enumerate}
+
+      \item 
+
+        We need to begin by calculating the base current. This can be done by doing the following:
+
+        $$I_b=\frac{S_b}{V_b\sqrt{3}}$$
+        $$I_b=\frac{30}{13.8\sqrt{3}}$$
+        $$I_b=1.2551pu$$
+
+        We then need to find the current at the motor. We start with finding the phase angle:
+
+        $$\cos^{-1}(.85)=31.788^{\circ}$$
+
+        Since the power factor is leading, we get:
+
+        $$\phi=-31.788^{\circ}$$
+
+        The power at the motor becomes:
+
+        $$S=\frac{15}{.85}\angle\phi$$
+        $$S=17.647\angle-31.788^{\circ}$$
+        $$S=15-9.296j$$
+
+        Converting to per-unit, we get:
+
+        $$S=(0.5-.31j)pu$$
+
+        The motor voltage is:
+
+        $$V_m=\frac{13.2}{13.8}$$
+        $$V_m=.9565pu$$
+
+        Thus, we can calculate the current as:
+
+        $$I_m=\frac{S^*}{V}$$
+        $$I_m=\frac{.5+.31j}{.9565}$$
+        $$\boxed{I_m=(.5227+.3241j)pu}$$
+
+        Since the line is fully serial, the current throughout the line is the same, giving us:
+
+        $$\boxed{I_G=(.5227+.3241j)pu}$$
+        $$\boxed{I_L=(.5227+.3241j)pu}$$
+
+        The voltage at the generator terminals can be calculated once we find the overall impedance of the line. This gives:
+
+        $$X_t=.0315+.15753j+.1372j+.24j+.1j+.12j$$
+        $$\boxed{X_t=(.0315+.7547j)pu}$$
+
+        The voltage at the terminals is then:
+
+        $$V_G=V_m+IX_t$$
+        $$V_G=.9565+(.5227+.3241j)(.0315+.7547j)$$
+        $$\boxed{V_G=(0.7284+0.4047j)pu}$$
+
+        We can find the sending-end line voltage by taking the above value and subtracting the voltage drop across $X_g$ and $X_{T1}$:
+
+        $$V_L=V_G-I(X_{s1}+X_{T1})$$
+        $$V_L=.7284+.4047j-(.5227+.3241j)[(.1j)+(.1372j)]$$
+        $$\boxed{V_L=(.8052+.2807j)pu}$$
+
+        The complex power supplied by the generator may be found by multiplying the voltage and current values together:
+
+        $$S_G=I^*V_G$$
+        $$S_G=(.5227-.3241j)(.7284+.4047j)$$
+        $$\boxed{S_G=(.5119-.02454j)pu}$$
+
+        In summary, we obtained the following in per-unit:
+
+        $$\boxed{\left\{\begin{array}{l l l} I_m &= & .5227+.3241j\\I_G &= & .5227+.3241j\\I_L &= & .5227+.3241j\\V_G &= & .7284+.4047j\\V_L &= & .8052+.2807j\\S_G &= & .5119-.02454j\end{array}}$$
+
+      \item 
+
+        We may use the per-unit values obtained in (a) to easily convert back to real values:
+
+        $$I=(.5227+.3241j)\left( \frac{30}{13.8} \right)$$
+        $$\boxed{I=1.1363+0.7046j[\si{\kilo\ampere}]}$$
+
+        $$V_G=(.7284+.4047j)(13.8)$$
+        $$\boxed{V_G=10.0519+5.5849j[\si{\kilo\volt}]}$$
+
+        $$V_L=(.8052+.2807j)(13.8)$$
+        $$\boxed{V_L=11.1118+3.8737j[\si{\kilo\volt}]}$$
+
+        $$S_G=(.5119-.02454j)(30)$$
+        $$\boxed{S_G=15.357-.7362j[\si{\mega\volt\ampere}]}$$
+
+        In summary, we obtained the following:
+
+        $$\boxed{\left\{\begin{array}{l l l} I_m &= & 1.1363+.7046j [\si{\kilo\ampere}]\\I_G &= & 1.1363+.7046j [\si{\kilo\ampere}]\\I_L &= & 1.1363+.7046j [\si{\kilo\ampere}]\\V_G &= & 10.0519+5.5849j[\si{\kilo\volt}]\\V_L &= & 11.1118+3.8737j[\si{\kilo\volt}]\\S_G &= & 15.357-.7362j[\si{\mega\volt\ampere}]\end{array}}$$
+
+    \end{enumerate}
+
+  \item
+
+    The load impedance may be represented as:
+
+    $$Z_L=14.14+14.14j[\si{\ohm}]$$
+
+    In per-unit, we get:
+
+    $$Z_L=\left( \frac{30}{13.8^2} \right)(14.14+14.14j)$$
+    $$Z_L=(2.2275+2.2275j)pu$$
+
+    We then calculate the line current:
+
+    $$I=\frac{V_G}{X_{T1}+X_{T2}+Z_L+Z_{L2}}$$
+    $$I=\frac{.9565}{.1372j+.24j+.0315+.15753j+2.2275+2.2275j}$$
+    $$\boxed{I=(.1697-.2075j)pu}$$
+
+    Using this, we find the load voltage:
+
+    $$V_L=IZ_L$$
+    $$V_L=(.1697-.2075j)(2.2275+2.2275j)$$
+    $$\boxed{V_L=(.8402-.0842j)pu}$$
+
+    The voltage then becomes:
+
+    $$V_L=(.840199-.084205)(13.8)$$
+    $$\boxed{V_L=11.6-1.162j[\si{\kilo\volt}]}$$
+
+    And finally, the current is:
+
+    $$I_L=\frac{V_L}{Z_L\sqrt{3}}$$
+    $$I_L=\frac{(11.5947-1.162j)}{(14.14+14.14j)\sqrt{3}}$$
+    $$\boxed{I_L=.213-.2604j[\si{\kilo\ampere}]}$$
+
+    In summary, we obtained the following values:
+
+    $$\boxed{\left\{\begin{array}{lllll} I_L&=& (.1697-.2075j)pu&=&.213-.2604j[\si{\kilo\ampere}]\\ V_L&=& (.8402-.0842j)pu&=&11.6-1.162j[\si{\kilo\volt}]\end{array}}$$
+
+\end{enumerate}
+
+\end{document}
+
