@@ -31,6 +31,7 @@
     * [**Homework 2**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/Homework2.pdf)
 * [**Labs**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/)
     * [**Lab 1**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab1.pdf)
+    * [**Lab 2**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab2.pdf)
 
 <!--
   * [**Chapter 1**](#Notes/Chapter\ 1)
