@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Fundamentals of Electronics
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 7}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Generator Model
+
+    \begin{itemize}
+
+      \item Synchronous Generator
+
+        \begin{itemize}
+
+          \item Consists of a rotor (rotating piece)
+
+          \item And a stator
+
+          \item Rotating part consists of a coil receiving D.C. current, with a magnetic orientation
+
+          \item The rotation results in a flux, which passes through the stator
+
+          \item From this, we can obtain (with $\lambda=N\phi$):
+
+            $$\frac{d\lambda}{dt}=e=\omega k\sin(\omega t)$$
+            $$|\hat{E}_f|=4.44 f N\phi_{max}\propto I_{dc},\omega$$
+            $$\lambda=k\cos(\omega t)$$
+
+          \item The terminal voltage may be written as:
+
+            $$\hat{V}_t=\hat{E}_f-(r+jX_s)\hat{I}_a$$
+
+          \item We see that terminal voltage may be controlled using $\hat{E}_f$
+
+          \item The net injected current at different buses (substations) may be calculated using:
+
+            $$\hat{I}_i=\frac{(P_{Gi}+jQ_{Gi})^*}{\hat{V}_i^*}$$
+
+          \item For buses without a generator, there is no source injection or load, so there is no net current injection (zero-injection bus)
+
+            \begin{itemize}
+
+              \item Such substations may be used as 'switching' substations
+
+            \end{itemize}
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Transmission Lines
+
+    \begin{itemize}
+
+      \item For a transmission line with resistance $r$ and impedance $jx$, we add two capacitors, one on each side of the impedance, with value $jb$
+
+      \item With this model, we may write:
+
+        $$jb=\frac{1}{2}jb_{lc}$$
+
+        \begin{itemize}
+
+          \item Where $b_{lc}$ is the total line charging susceptance of the line
+
+        \end{itemize}
+
+      \item At a bus with a load, we may find the current as:
+
+        $$\hat{I}_2=\frac{(\hat{V}_2-\hat{V}_1)}{r_{12}+jx_{12}}+\hat{V}_2jb_{12}+\frac{(\hat{V}_2-\hat{V}_3)}{r_{23}+jx_{23}}+\hat{V}_2jb_{23}+\frac{(\hat{V}_2-\hat{V}_4)}{r_{24}+jx_{24}}+\hat{V}_2jb_{24}+$$
+
+    \end{itemize}
+
+  \item Bus Admittance Matrix
+
+    \begin{itemize}
+
+      \item We may build a bus admittance matrix ($Y_{bux}$) may be built by inspection:
+
+        $$Y_{bus}(i,i)=\text{ sum of admittances of all branches incident to bus }i$$
+        $$Y_{bus}(i,j)=\text{ negative of the admittance of the branch connecting bus }i\text{ and }j$$
+        $$Y_{bus}(i,j)=Y_{bus}(j,i)$$
+
+      \item Properties of $Y_{bus}$:
+
+        \begin{itemize}
+
+          \item Symmetric square matrix
+
+          \item Has complex entries
+
+          \item Super sparse (\textit{i}.\textit{e}. majority of the entries are zero)
+
+          \item $Y_{bus}$ is non-singular only if there exists at least one branch connecting a bus to ground
+
+          \item $(Y_{bus})^{-1}=Z_{bus}$ — the bus impedance matrix!
+
+        \end{itemize}
+
+      \item Properties of $Z_{bus}$:
+
+        \begin{itemize}
+
+          \item It is a full matrix
+
+          \item It is a symmetric matrix
+
+          \item Diagonal entries are equal to the Th\'evenin equivalent impedances looking into the network at that bus
+
+            \begin{itemize}
+
+              \item This means Th\'evenin equivalents may be formulated by finding $Z_{bus}$ and finding the corresponding diagonal entry for a bus
+
+            \end{itemize}
+
+        \end{itemize}
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
