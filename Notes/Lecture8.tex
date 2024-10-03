@@ -1,0 +1,123 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 8 — Exam 1 Recap}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Consumed real power (average power) from a linear circuit may be expressed as:
+
+    $$P=\frac{1}{2}V_{max}I_{max}\cos(\phi)$$
+    $$\phi=\theta_v-\theta_i$$
+
+    \begin{itemize}
+
+      \item With functions:
+
+        $$v(t)=V_{max}\cos(\omega t+\theta_v)$$
+        $$i(t)=I_{max}\cos(\omega t+\theta_i)$$
+
+    \end{itemize}
+
+  \item The reactive power can then be defined as:
+
+    $$Q=\frac{1}{2}V_{max}I_{max}\sin(\phi)\quad\text{ (in VArs)}$$
+
+  \item The complex power becomes:
+
+    $$S=P+jQ,\, |S|=\frac{1}{2}V_{max}I_{max}$$
+
+  \item RMS values are define as:
+
+    $$V_{rms}=\frac{1}{\sqrt{2}}V_{max}$$
+    $$I_{rms}=\frac{1}{\sqrt{2}}I_{max}$$
+
+  \item The frequency can be written as:
+
+    $$\omega=2\pi f$$
+
+  \item For a capacitor:
+
+    $$v_c(t)i(t)=p_c(t)$$
+    $$\text{Ave}\left\{ p_c(t) \right\}=0$$
+
+  \item And for an inductor:
+
+    $$v_l(t)i(t)=p_c(t)$$
+    $$\text{Ave}\left\{ p_l(t) \right\}=0$$
+
+  \item Frequency of power is double that of voltage/current
+
+  \item For 3-Phase Circuits:
+
+    $$Q_{3\phi}=\sqrt{3}V_{LL}^{rms}I_L\sin(\phi)$$
+    $$P_{3\phi}=3P=3|V_{rms}||I_{rms}|(pf)=\sqrt{3}|V_{LL}^{rms}||I_L|(pf)$$
+    $$S_{3\phi}=\sqrt{3}\hat{V}_{LL}^{rms}\hat{I}_{rms}^{*}=3\hat{V}_{LN}\hat{I}_{rms}^{*}$$
+
+  \item Per-unit system (actual/base)
+
+    \begin{itemize}
+
+      \item Select $S_{base}$ for the entire system
+
+      \item Then, select $V_{base}$ for one zone
+
+      \item Calculate $V_{base}$ for all other zones, using transformer turn ratios between them and zone one
+        
+      \item Calculate $z_{base}$, $I_{base}$ for all zones
+
+        $$I_{base(i)}=\frac{S_{base}}{V_{base(i)}}\text{ and }z_{base}=\frac{V^{2}_{base(i)}}{S_{base}}$$
+
+    \end{itemize}
+
+  \item 3-Phase Per-unit system:
+
+    \begin{itemize}
+
+      \item $I_{base(i)}=\dfrac{S_{base}}{\sqrt{3}V_{LLbase(i)}}$
+
+      \item $z_{base(i)}=\dfrac{V_{LLbase(i)}}{S_{base}}=\dfrac{V_{LNbase(i)}}{S_{base}/3}$
+
+      \item Solving in this manner will give solutions in per-unit
+
+    \end{itemize}
+
+  \item Balanced $3\pi$ circuits
+
+    \begin{itemize}
+
+      \item Sources are balanced, their magnitudes equal, with phase angles $\mp120^{\circ}$ apart
+
+      \item Loads, lines, all impedance/phase will be identical
+
+      \item To convert from delta to 'Y' connection, we may write:
+
+        $$\hat{V}_{an}=\frac{\hat{V}_{AB}}{\sqrt{3}}e^{-j30}$$
+
+      \item Or:
+
+        $$\hat{V}_{AB}=\sqrt{3}\hat{V}_{an}e^{j30}$$
+
+      \item We can find voltages of other phases simply by offsetting the angle of one by $120^{\circ}$
+        
+      \item We can compensate for $Q$ by adding a capacitor in parallel with the load
+
+      \item The power factor may be computed as: $pf=\cos(\phi)$
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
