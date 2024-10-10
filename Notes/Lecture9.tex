@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 9}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Modifying an Existing $Y_{bus}$:
+
+    \begin{itemize}
+
+      \item \textcolor{blue}{Connecting}/\textcolor{red}{disconnecting} a line from terminals $k$ and $m$ results in \textcolor{blue}{addition}/\textcolor{red}{subtraction} of $y$ from diagonal entries and \textcolor{blue}{subtraction}/\textcolor{red}{addition} from $km$ and $mk$ entries
+
+      \item \textcolor{blue}{Connecting}/\textcolor{red}{disconnecting} a line from a single point $k$ results in \textcolor{blue}{addition}/\textcolor{red}{subtraction} of $y$ from the corresponding diagonal entry
+
+    \end{itemize}
+
+  \item Synchronous Generators
+
+    \begin{itemize}
+
+      \item A field (excitation) voltage, $E_f$, is connecting to a reactance $jX_s$
+
+      \item Taking $\hat{V}_t=V_t\angle 0^{\circ}$, and $\hat{E}_f=\hat{V}_t+jX_s\hat{I}_a$, we may obtain:
+
+        $$\hat{E}_f=E_f\angle \delta\quad\text{ and }\hat{I}_a=I_a\angle\phi$$
+        $$S_g=\hat{V}_t\cdot\left( \hat{I}_a \right)^*,\quad \hat{I}_a=\frac{\hat{E}_f-\hat{V}_t}{jX_s}$$
+        $$S_g=\frac{j}{X_s}\left( V_tE_f\cos(\delta)- jV_tE_f\sin(\delta)-V_t^2 \right)$$
+
+      \item This gives us:
+
+        $$P_g=\frac{V_tE_f}{X_s}\sin(\delta)=V_tI_a\cos(\phi)$$
+        $$Q_g=\frac{V_tE_f}{X_s}\cos(\delta)-\frac{V_t^2}{X_s}$$
+
+      \item We may make some observations:
+
+        $$P_g=0 \to \delta = 0$$
+        $$Q_g>0\to\text{ acts like a capacitor (synchronous condenser)}$$
+        $$Q_g<0\to\text{ acts like a reactor}$$
+
+    \end{itemize}
+
+  \item Types of Buses:
+
+    \begin{itemize}
+
+      \item Load/$PQ$ bus
+
+        \begin{itemize}
+
+          \item Supplies some real and reactive power
+
+        \end{itemize}
+
+      \item Generator/$PV$ Bus
+
+        \begin{itemize}
+
+          \item Supplies some real power and voltage (magnitude), with unknown reactive power
+
+        \end{itemize}
+
+      \item Slack/Swing Bus
+
+        \begin{itemize}
+
+          \item Know the voltage and phase angle, with unknown real and reactive powers
+
+        \end{itemize}
+
+      \item Total buses in a system:
+
+        $$n=n_{PV}+n_{PQ}+1$$
+
+        $$\left[ \underbrace{1}_{\text{slack}}, \underbrace{2, 3, \cdots, (n_{PV}+1)}_{\text{$PV$ buses}}, \underbrace{(n_{PV}+2), \cdots, n}_{\text{$PQ$ buses}} \right]$$
+
+      \item Thus, we may write:
+
+        $$\underbrace{Y_{bus}}_{n\times n}\underbrace{\hat{V}}_{n\times 1}=\underbrace{\hat{I}}_{n\times 1}$$
+        $$Y_{bus}=G_{bus}+jB_{bus}$$
+        $$S_k=P_k+jQ_k=\hat{V}_k\hat{I}_k^*$$
+        $$\hat{I}_k=\sum_{j=1}^k Y_{bus}(k,j)\cdot\hat{V}_j$$
+
+      \item Finally, we can get:
+
+        $$P_k=\sum_{j=1}^n V_kV_j\left( G_{kj}\cos(\theta_{kj})+B_{kj}\sin(\theta_{kj}) \right)$$
+        $$P_k=\sum_{j=1}^n V_kV_j\left( G_{kj}\sin(\theta_{kj})-B_{kj}\cos(\theta_{kj}) \right)$$
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
