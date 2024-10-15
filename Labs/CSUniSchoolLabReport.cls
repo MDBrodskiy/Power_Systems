@@ -110,6 +110,6 @@ citecolor=black,
 \usepackage{multicol}
 \usepackage{float}
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage{xcolor,colortbl}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 
