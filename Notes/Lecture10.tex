@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 10}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Types of Buses
+
+    \begin{itemize}
+
+      \item Slack Bus (always one)
+
+        \begin{itemize}
+
+          \item Known: Voltage magnitude $V$ and the phase angle $\theta$
+
+          \item Unknown: Net powers $P$ and $Q$
+
+        \end{itemize}
+
+      \item $PV$ (Generator) Buses (there are $n_{PV}$ such buses)
+
+        \begin{itemize}
+
+          \item Known: Voltage magnitude $V$ and real power $P$
+
+            \begin{itemize}
+
+              \item Net powers are:
+
+                $$P=P_G-P_D$$
+                $$Q=Q_G-Q_D$$
+
+            \end{itemize}
+
+          \item Unknown: Phase angle $\theta$ and reactive power $Q$
+
+        \end{itemize}
+
+      \item $PQ$ (Load) Buses (there are $n_{PQ}$ such buses)
+
+        \begin{itemize}
+
+          \item Known: Real and reactive powers $P$ and $Q$
+
+            \begin{itemize}
+
+              \item Net powers are:
+
+                $$P=-P_D$$
+                $$Q=-Q_D$$
+
+            \end{itemize}
+
+          \item Unknown: Voltage magnitude $V$ and phase angle $\theta$
+
+        \end{itemize}
+
+      \item Note: for these buses $P$ and $Q$ refers to the net injected power (\textit{e}.\textit{g}. If a generator supplies $P_G$ and power $P_D$ is dissipated, then $P$ refers to $P_G-P_D$)
+
+    \end{itemize}
+
+  \item Working with Buses
+
+    \begin{itemize}
+
+      \item Given that $\hat{S}_k=\hat{V}_k\hat{I}_k^*$ and $Y_{bus}\cdot V=I$, we may write:
+
+        $$\hat{I}_k=\sum_{m=1}^n Y_{bus}^*(k,m)\cdot\hat{V}_m^*$$
+
+      \item This gives us:
+
+        $$\hat{S}_k=\hat{V}_k\sum_{m=1}^n Y_{bus}^*(k,m)\cdot\hat{V}^*_m$$
+
+    \end{itemize}
+
+  \item Considering a system with $n$ buses (where $n=1+n_{PV}+n_{PQ}$):
+
+    \begin{itemize}
+
+      \item The total number of equations matches the total number of unknowns
+
+      \item The equations are non-linear and therefore requires solutions of nonlinear algebraic equations
+
+      \item Unknown voltages and phases may be written as:
+
+        $$X^T=[\underbrace{\theta_2,\theta_3,\cdots,\theta_n}_{n-1}\Big| \underbrace{V_{n_{PV}+2},\cdots,V_n}_{n_{PQ}}]$$
+
+      \item For a given bus $k$:
+
+        $$P_k=P_{G}-P_D=V_k\sum V_m(G_{bus}\cos(\theta_{bus})+B_{bus}\sin(\theta_{km})-P_k^{sch}=0\quad\text{ (for $PQ$ and $PV$ buses)}$$
+          $$Q_k=V_k\sum V_m(G_{bus}\sin(\theta_{bus})-B_{bus}\cos(\theta_{km})-Q_k^{sch}=0\quad\text{ (for $PQ$ buses)}$$
+
+            \begin{itemize}
+
+              \item We see that the solutions to these equations may be represented by a non-linear vector $X$, which solves $X^T$ from above
+
+            \end{itemize}
+
+    \end{itemize}
+
+  \item Solving Non-linear Algebraic Equations
+
+    \begin{itemize}
+
+      \item We will use the Newton-Raphson method
+
+      \item Scalar case ($F(x)$ is a non-linear function, and $x$ is a single variable):
+
+        \begin{itemize}
+
+          \item We may begin by Taylor expanding around some value $x_o$ such that:
+
+            $$F(x)\approx F(x_o)+\dfrac{\partial F}{\partial x}\Big| (x-x_o)+\overbrace{\cdots}^{\text{higher order terms we ignore}}$$
+
+          \item We let $\dfrac{\partial F}{\partial x}=F_x$ and plug in the value to get:
+
+            $$F_x(x-x_o)+F(x_o)\approx 0$$
+            $$x\approx x_o-F_x^{-1}F(x_o)$$
+
+          \item A $k$-iteration counter allows us to write:
+
+            $$x^{k+1}\approx x^k-(F_x^k)^{-1}F(x^k)$$
+
+          \item Starting with $x^1=x_o$, continue updating $x^k$ until $|x^{k+1}-x^k|\leq \varepsilon$ (the $\varepsilon$ is known as the termination threshold)
+
+          \item We may define the Jacobian to rewrite the above formula as:
+
+            $$\bar{x}^{k+1}=\bar{x}^{k}-[J(x^k)]^{-1}F(x^k)$$
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Applying this to the case of the power flow problem
+
+    \begin{itemize}
+
+      \item Assume $\hat{x}^o$ and iterate until $\underbrace{||F^{k+1}||}_{\text{norm}|F_j(x)|}< \varepsilon$ (typically $10^{-4}[p.u.]$)
+
+      \item Taking the transpose, we may write:
+
+        $$[F(\bar{x})]^T=\Big[ \underbrace{P_2(x)-P_2^{sch}, P_3(x)-P_3^{sch},\cdots,P_n(x)-P_n^{sch}}_{n}$$
+        $$\Big| \underbrace{Q_{n_{PQ}+2}(x)-Q_{n_{PQ}+2}^{sch}, \cdots,Q_n(x)-Q_n^{sch} }_{n_{PQ}}\Big]$$
+
+        \begin{itemize}
+
+          \item The Jacobian matrix will be quite sparse
+
+        \end{itemize}
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
