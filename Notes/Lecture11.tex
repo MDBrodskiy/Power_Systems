@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 11}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Read data: Bus data, branch data
+
+  \item Form $Y_{bus}=G+jB$
+
+  \item Initialize $k=0$:
+
+    \begin{itemize}
+
+      \item Let:
+
+        $$V_i=1[p.u.]\quad i=n_{PV}+2,\cdots,n\quad\text{ (All $PQ$ Buses)}$$
+        $$V_i=V_I^{sch}\quad i=1,2,\cdots,n_{PV}+1\quad\text{ (Slack buses, $PV$ Buses)}$$
+        $$B_i=0\quad i=1,2,\cdots,n$$
+        $$x^{k}=\left[ \theta_2,\cdots,\theta_n\Big| V_{n_{PV}+2},\cdots,V_{n} \right]$$
+
+    \end{itemize}
+
+  \item Calculate bus mismatches:
+
+    $$P_i^{cal}(x^k)-P_i^{sch}=\Delta P_i\quad i=2,3,\cdots,n\text{ ($n-1$ equations)}$$
+    $$Q_i^{cal}(x^k)-Q_i^{sch}=\Delta Q_i\quad i=n_{PV}+2,\cdots,n\text{ ($n_{PQ}$ equations)}$$
+
+  \item Build the Jacobian $J$
+
+  \item Take:
+
+    $$x^{k+1}=x^k-[J]^{-1}F(x^k)$$
+
+  \item If $|F(x^{k+1})|<\varepsilon$ (the largest absolute value), stop; otherwise, $k=k+1$ and go to step 4
+
+    \begin{itemize}
+
+      \item Typically use $\varepsilon=10^{-3}\text{ or }10^{-4}[p.u.]$
+
+    \end{itemize}
+
+\end{enumerate}
+
+\begin{itemize}
+
+  \item Generator buses have reactive limits, which can be specified as $Q_{min}$ and $Q_{max}$
+
+  \item Slack bus provides difference between total load and total generation, as well as accounts for the system loss (total real power supplied minus the total real power drawn/loaded)
+
+\end{itemize}
+
+\end{document}
+
