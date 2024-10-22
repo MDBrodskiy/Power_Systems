@@ -1,0 +1,193 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Abur
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Homework 3}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Abur}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+    \begin{center}
+      \underline{Chapter 9}:
+    \end{center}
+
+  \item
+
+  \item
+
+    We can expand the given table to write:
+
+    \begin{center}
+      \begin{tabular}[H]{|c|c|c|}
+        \hline
+        From-To & Reactance $[p.u.]$ & Admittance $[pu]$\\
+        \hline
+        1-2 & $.04j$ & $-25j$\\
+        \hline
+        1-6 & $.06j$ & $-16.667j$\\
+        \hline
+        2-4 & $.03j$ & $-33.333j$\\
+        \hline
+        2-3 & $.02j$ & $-50j$\\
+        \hline
+        3-4 & $.08j$ & $-12.5j$\\
+        \hline
+        4-5 & $.06j$ & $-16.667j$\\
+        \hline
+        5-6 & $.05j$ & $-20j$\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    This allows us to write the corresponding connections into the matrix:
+
+    $$Y_{bus}=\left[ \begin{matrix} & 25 & & & & 16.667\\ 25 & & 50 & 33.333 & & \\ & 50 & & 12.5 & & \\ & 33.333 & 12.5 & & 16.667 &\\ & & & 16.667 & & 20\\ 16.667 & & & & 20 &  \end{matrix} \right]j$$
+
+    By observation from the diagram, we may write all of the following admittances as zero:
+
+    \begin{center}
+      \begin{tabular}[H]{|c|c|}
+        \hline
+        From & To\\
+        \hline
+        1 & 3,4,5\\
+        \hline
+        2 & 5,6\\
+        \hline
+        3 & 1,5,6\\
+        \hline
+        4 & 1,6\\
+        \hline
+        5 & 1,2,3\\
+        \hline
+        6 & 2,3,4\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    This gives us:
+
+    $$Y_{bus}=\left[ \begin{matrix} & 25 & 0 & 0 & 0 & 16.667\\ 25 & & 50 & 33.333 & 0 & 0\\ 0 & 50 & & 12.5 & 0 & 0\\ 0 & 33.333 & 12.5 & & 16.667 & 0\\ 0 & 0 & 0 & 16.667 & & 20\\ 16.667 & 0 & 0 & 0 & 20 &  \end{matrix} \right]j$$
+
+    We see that now only the diagonal is left. Thus, we write KVL equations whilst imagining a current element $I_n$ for each bus $n$. This allows us to write:
+
+    $$I_1=(V_1-V_2)(-25j)+(V_1-V_6)(-16.667j)$$
+    $$I_2=(V_2-V_1)(-25j)+(V_2-V_3)(-50j)+(V_2-V_4)(-33.333j)$$
+    $$I_3=(V_3-V_2)(-50j)+(V_3-V_4)(-12.5j)$$
+    $$I_4=(V_4-V_2)(-33.333j)+(V_4-V_3)(-12.5j)+(V_4-V_5)(-16.667j)$$
+    $$I_5=(V_5-V_4)(-16.667j)+(V_5-V_6)(-20j)$$
+    $$I_6=(V_6-V_1)(-16.667j)+(V_6-V_5)(-20j)$$
+
+    Simplifying the equations, we obtain
+
+    $$I_1=j[-41.667V_1+25V_2+16.667V_6]$$
+    $$I_2=j[-108.33V_2+25V_1+50V_3+33.333V_4]$$
+    $$I_3=j[-62.5V_3+50V_2+12.5V_4]$$
+    $$I_4=j[-62.5V_4+33.333V_2+12.5V_3+16.667V_5]$$
+    $$I_5=j[-36.667V_5+16.667V_4+20V_6]$$
+    $$I_6=j[-36.667V_6+16.667V_1+20V_5]$$
+
+    Given that we know:
+
+    $$I_n=Y_{bus}V_{n}$$
+
+    We look at the coefficients from the currents to obtain the diagonals:
+
+    $$\boxed{Y_{bus}=\left[ \begin{matrix} -41.667 & 25 & 0 & 0 & 0 & 16.667\\ 25 & -108.33 & 50 & 33.333 & 0 & 0\\ 0 & 50 & -62.5 & 12.5 & 0 & 0\\ 0 & 33.333 & 12.5 & -62.5 & 16.667 & 0\\ 0 & 0 & 0 & 16.667 & -36.667 & 20\\ 16.667 & 0 & 0 & 0 & 20 & -36.667 \end{matrix} \right]j[p.u.]}$$
+
+  \item
+
+    Adding another connection between buses 1 and 5 would mean that only the $nm$-th elements are modified, with $nm$ being any combination of $1$ and $5$. Thus, we see that, with this $-10j$ admittance, we get two new terms at $15$ and $51$:
+
+    $$Y_{bus}=\left[ \begin{matrix} ? & 25 & 0 & 0 & 10 & 16.667\\ 25 & -108.33 & 50 & 33.333 & 0 & 0\\ 0 & 50 & -62.5 & 12.5 & 0 & 0\\ 0 & 33.333 & 12.5 & -62.5 & 16.667 & 0\\ 10 & 0 & 0 & 16.667 & ? & 20\\ 16.667 & 0 & 0 & 0 & 20 & -36.667 \end{matrix} \right]j$$
+
+    We then re-check the current equations for buses 1 and 5:
+
+    $$I_1=j[-51.667V_1+25V_2+10V_5+16.667V_6]$$
+    $$I_5=j[-46.667V_5+10V_1+16.667V_4+20V_6]$$
+
+    Thus, we get: 
+
+    $$\boxed{Y_{bus}=\left[ \begin{matrix} -51.667 & 25 & 0 & 0 & 10 & 16.667\\ 25 & -108.33 & 50 & 33.333 & 0 & 0\\ 0 & 50 & -62.5 & 12.5 & 0 & 0\\ 0 & 33.333 & 12.5 & -62.5 & 16.667 & 0\\ 10 & 0 & 0 & 16.667 & -46.667 & 20\\ 16.667 & 0 & 0 & 0 & 20 & -36.667 \end{matrix} \right]j[p.u.]}$$
+
+  \item
+
+    We may begin finding diagonal entries by summing all of the admittances incident at each bus:
+
+    $$Y_{11}=\frac{1}{.2j}+\frac{1}{.25j}+\frac{.24j}{2}+\frac{.3j}{2}$$
+    $$Y_{22}=\frac{1}{.2j}+\frac{1}{.1j}+\frac{.24j}{2}+\frac{.16j}{2}+.3j$$
+    $$Y_{33}=\frac{1}{.25j}+\frac{1}{.1j}+\frac{.16j}{2}+\frac{.3j}{2}-.6j$$
+
+    Solving, we get:
+
+    $$Y_{11}=-5j-4j+.12j+.15j$$
+    $$Y_{22}=-5j-10j+.12j+.08j+.3j$$
+    $$Y_{33}=-4j-10j+.08j+.15j-.6j$$
+
+    And finally:
+
+    $$Y_{11}=-8.73j[p.u.]$$
+    $$Y_{22}=-14.5j[p.u.]$$
+    $$Y_{33}=-14.37j[p.u.]$$
+
+    \begin{enumerate}
+
+      \item The off-diagonal elements will simply be the admittances of the connections, which gives us:
+
+        $$\boxed{Y_{bus}=\left[ \begin{matrix}-8.73 & 5 & 4\\ 5 & -14.5 & 10\\ 4 & 10 & -14.37 \end{matrix} \right]j}$$
+
+      \item With bus 2 gone, we may write:
+
+        $$Y_{11}=-4j+\frac{.3j}{2}$$
+        $$Y_{33}=-4j+\frac{.3j}{2}-.6j$$
+
+        And then:
+
+        $$Y_{11}=-3.85j$$
+        $$Y_{33}=-4.45j$$
+
+        The off-diagonal terms are then simply $4j$:
+
+        $$\boxed{Y_{bus}=\left[ \begin{matrix} -3.85 & 4\\ 4 & -4.45 \end{matrix}\right]j}$$
+
+    \end{enumerate}
+
+  \item First, we get the current flow at bus 1:
+
+    $$I_1=\frac{.9}{1.15j}=-.7826j$$
+
+    We now write KCL equations which integrate the new voltage source:
+
+    $$-.7826j=V_1(-.8696j) + (V_1-V_2)(.252j)+(V_1-V_3)(.3243j)$$
+    $$0=(V_2)(.3j)+(V_2-V_1)(.252j)+(V_2-V_3)(.1626j)$$
+    $$0=(V_3)(-.6j)+(V_3-V_1)(.3423j)+(V_3-V_2)(.1626j)$$
+
+    This gives us:
+
+    $$-.2933V_1-.252V_2-.3243V_3=-.7826$$
+    $$[.7146V_2-.252V_1-.1626V_3]j=0$$
+    $$[-.0951V_3-.3423V_1-.1626V_2]j=0$$
+
+    From which we may build:
+
+    $$Z_{bus}=\left( \left[ \begin{matrix} -.2933 & -.252 & -.3243\\ -.252 & .7146 & -.1626\\ -.3423 & -.1626 & -.0951\end{matrix}\right]j \right)^{-1}$$
+
+    Taking the inverse, we get:
+
+    $$\boxed{Y_{bus}=\left[ \begin{matrix} -1.2946 & .3945 & 3.7403\\ .4347 & -1.1399 & .4668\\ 3.9167 & .529 & -3.7454 \end{matrix} \right]j}$$
+
+    Note that, due to rounding of decimals, the matrix produced is asymmetric, even though the admittance matrix should exhibit symmetry.
+
+\end{enumerate}
+
+\end{document}
+
