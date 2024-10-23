@@ -22,6 +22,36 @@
 
   \item
 
+    Per the connection/disconnection rules of $Y_{bus}$, we know that adding a connection between 2 and 4 will result only in changes to $Y_{22}$, $Y_{24}$, $Y_{42}$, and $Y_{44}$. Thus, we may rewrite all other values from the matrix obtained in Example 9.4:
+
+    $$Y_{bus}=\left[ \begin{matrix} 1.4-j18.66 & -1.4+j18.66 & 0 & 0 & 0\\ -1.4+j18.66 & ??? & -.318+j3.98 & ??? & 0\\ 0 & -.318+j3.98 & .636-j7.73 & -.318+j3.98 & 0\\ 0 & ??? & -.318+j3.98 & ??? & -.932+j12.43\\ 0 & 0 & 0 & -.932+j12.43 & .932-j12.43 \end{matrix} \right]$$
+
+    Per our connection rules, connecting a line from terminal 2 to terminal 4 results in addition of the new admittance to diagonal entries:
+
+    $$Y_{22}'=Y_{22}+(.01+.15j)^{-1}+.11j$$
+    $$Y_{44}'=Y_{44}+(.01+.15j)^{-1}+.11j$$
+
+    This gives us:
+
+    $$Y_{22}'=(2.16-29.104j)+(.01+.15j)^{-1}+.11j$$
+    $$Y_{44}'=(1.692-22.877j)+(.01+.15j)^{-1}+.11j$$
+
+    And finally:
+
+    $$Y_{22}'=2.6025-35.6312j[p.u.]$$
+    $$Y_{44}'=2.1345-29.4042j[p.u.]$$
+
+    We then find the equivalent admittance by taking the inverse of the impedance:
+
+    $$Z_{eq}=\frac{(.01+.15j)^{2}}{2(.01+.15j)}$$
+    $$Y_{eq}=\frac{2(.01+.15j)}{(.01+.15j)^{2}}$$
+    $$Y_{eq}=\frac{2}{(.01+.15j)}$$
+    $$Y_{24}=Y_{42}=-Y_{eq}=-.885+13.2743j[p.u.]$$
+
+    This allows us to construct the modified matrix as:
+
+    $$\boxed{Y_{bus}=\left[ \begin{matrix} 1.4-j18.66 & -1.4+j18.66 & 0 & 0 & 0\\ -1.4+j18.66 & 2.6025-35.6312j & -.318+j3.98 & -.885+13.2743j & 0\\ 0 & -.318+j3.98 & .636-j7.73 & -.318+j3.98 & 0\\ 0 & -.885+13.2743j & -.318+j3.98 & 2.1345-29.4042j & -.932+j12.43\\ 0 & 0 & 0 & -.932+j12.43 & .932-j12.43 \end{matrix} \right]}$$
+
   \item
 
     We can expand the given table to write:
@@ -161,31 +191,23 @@
 
     \end{enumerate}
 
-  \item First, we get the current flow at bus 1:
+  \item 
 
-    $$I_1=\frac{.9}{1.15j}=-.7826j$$
+    We write KCL equations which integrate the new voltage source (note the currents $I_2$ and $I_3$ are zero, but this is not reflected below to simplify further analysis):
 
-    We now write KCL equations which integrate the new voltage source:
-
-    $$-.7826j=V_1(-.8696j) + (V_1-V_2)(.252j)+(V_1-V_3)(.3243j)$$
-    $$0=(V_2)(.3j)+(V_2-V_1)(.252j)+(V_2-V_3)(.1626j)$$
-    $$0=(V_3)(-.6j)+(V_3-V_1)(.3423j)+(V_3-V_2)(.1626j)$$
+    $$I_1=V_1(-.8696j) + (V_1-V_2)(-5j)+.12V_1j+(V_1-V_3)(-4j)+.15V_1j$$
+    $$I_2=(V_2)(.3j)+(V_2-V_1)(-5j)+.12V_2j+(V_2-V_3)(-10j)+.08V_2j$$
+    $$I_3=(V_3)(-.6j)+(V_3-V_1)(-4j)+.15V_3j+(V_3-V_2)(-10j)+.08V_3j$$
 
     This gives us:
 
-    $$-.2933V_1-.252V_2-.3243V_3=-.7826$$
-    $$[.7146V_2-.252V_1-.1626V_3]j=0$$
-    $$[-.0951V_3-.3423V_1-.1626V_2]j=0$$
+    $$[-9.5396V_1+5V_2+4V_3]j=I_1$$
+    $$[-14.5V_2+5V_1+10V_3]j=I_2$$
+    $$[-14.37V_3+4V_1+10V_2]j=I_3$$
 
     From which we may build:
 
-    $$Z_{bus}=\left( \left[ \begin{matrix} -.2933 & -.252 & -.3243\\ -.252 & .7146 & -.1626\\ -.3423 & -.1626 & -.0951\end{matrix}\right]j \right)^{-1}$$
-
-    Taking the inverse, we get:
-
-    $$\boxed{Y_{bus}=\left[ \begin{matrix} -1.2946 & .3945 & 3.7403\\ .4347 & -1.1399 & .4668\\ 3.9167 & .529 & -3.7454 \end{matrix} \right]j}$$
-
-    Note that, due to rounding of decimals, the matrix produced is asymmetric, even though the admittance matrix should exhibit symmetry.
+    $$\boxed{Y_{bus}=\left( \left[ \begin{matrix} -9.5396 & 5 & 4\\ 5 & -14.5 & 10\\ 4 & 10 & -14.37\end{matrix}\right]j \right)[p.u.]}$$
 
 \end{enumerate}
 
