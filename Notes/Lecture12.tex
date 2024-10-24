@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 12}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Contingency Analysis (Lab 6)
+
+    \begin{enumerate}
+
+      \item Bus load for the next hour $\to$ $P_{Dk},Q_{Dk}$ ($PQ$ Buses)
+
+      \item Scheduled generation for the next hour $\to$ $P_{Gk},Q_{Gk}$ ($PV$ Buses)
+
+      \item Run PF $\to$ $V_k,\theta_k$ for $k=1,\cdots,n$
+
+      \item Compute the line flows $P_f$ for all lines in the system
+
+      \item Check if $|P_{fk}|<$ limits, and $|V_{k}|<$ limits for all lines and buses
+
+      \item Contingencies: line, generator, load outages
+
+      \item Run PF for each contingency (return to step 4 and keep repeating)
+
+    \end{enumerate}
+
+    \begin{itemize}
+
+      \item Note that every generator has a maximum and minimum reactive power limit
+
+      \item We once again use the Newton-Raphsson method to solve:
+
+        \begin{enumerate}
+
+          \item Assume $X^o=[\hat{\theta},V]^T$ and $\theta=0,V=1[p.u.]$
+
+          \item $\Delta P=P(X)-P^{sch}$ for all buses but slack bus, and $\Delta Q=Q(x)-Q^{sch}$ for $PQ$ buses ($n_{PQ}$)
+
+          \item We compute the Jacobian:
+
+            $$J(X)=\frac{\partial F}{\partial X},\quad X^{k+1}=X^k-[J]^{-1}F(X^k)$$
+
+          \item $Q_G(X^{k+1}):$ if $Q_{Gi}(X^{k+1)}$ violates its $Q$ limits, then convert bus $i$ from $PV$ to $PQ$-type and set its reactive power to the violated limit
+
+        \end{enumerate}
+
+    \end{itemize}
+
+  \item Steps of Fast Decoupled Load Flow (special case of Newton-Raphsson, provides faster solution):
+
+    \begin{enumerate}
+
+      \item Build $B'$, $B''$ (factorize $B'=L_1U_1$ and $B''=L_2U_2$); Initialize $V_i=1[p.u.],\theta_i=0$ if $i$ is not a slack bus or $PV$ bus. We get $P_{flag}=0;Q_{flag}=0$
+
+      \item Compute $\Delta P/V\to \Delta P_k/V_k=(P_k(X)-P_k^{sch})/V_k$ with $k=1,2,\cdots,n$; Set $P_{flag}=1$ if $||\Delta P||<\varepsilon=10^{-4}$; stop if $Q_{flag}=1$ and $P_{flag}=1$
+
+      \item $L_1U_1\Delta \theta=[\Delta P/V]\to$ For/back substitution ($\theta\Leftarrow \theta+\Delta \theta$)
+
+      \item Compute [$\Delta Q/V$]$\to \Delta Q_k/V_k=(Q_k(X)-Q_k^{sch})/V_k$, for $k:n_{PQ}$ to keep the $PQ$ buses; Set $Q_{flag}=1$ if $||\Delta Q||<\varepsilon=10^{-4}$; stop if $P_{flag}=1$ and $Q_{flag}=1$
+
+      \item $L_2U_2\Delta V=[\Delta Q/V]\to$ For/back substitution ($V\Leftarrow V+\Delta V$)
+
+    \end{enumerate}
+
+\end{itemize}
+
+\end{document}
+
