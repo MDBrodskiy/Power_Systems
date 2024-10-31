@@ -1,0 +1,115 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 14}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Per Unit System
+
+    \begin{itemize}
+
+      \item Pick one $S_{base}$ for the entire system (for three-phase systems, it will be $S_{3\phi}$)
+
+      \item Then, identify the transformer that separates the system into voltage zone, and label as zone $1,2,\cdots,n$
+
+        \begin{itemize}
+
+          \item Voltage or turns ratios should be provided in the problem
+
+        \end{itemize}
+
+      \item Selecting $V_{base}$ for zone 1: line-to-line voltage for a 3-$\phi$ system. Then, calculate $V_{base}$ for all other zones:
+
+        $$V_{base(j)}=\frac{n_j}{n_i}V_{base(i)},\quad j=2,3,\cdots$$
+
+      \item Then:
+
+        $$z_{base(i)}=\frac{V_{base(i)}}{S_{3\phi}}$$
+        $$I_{base}=\frac{\sqrt{3} V_{base(i)}}{S_{3\phi}}$$
+
+      \item Powers become:
+
+        $$P_{[p.u.]}=V_{[p.u.]}I_{[p.u.]}\cdot pf$$
+        $$Q_{[p.u.]}=V_{[p.u.]}I_{[p.u.]}\sin(\phi)\quad\quad\text{($\phi=\cos^{-1}(pf)$)}$$
+
+      \item Using the single-phase equivalent, we obtain:
+
+        $$\hat{V}_{S[p.u.]}=\hat{I}_{[p.u.]}(jx_{t[p.u.]}+R_{[p.u.]}+jx_{[p.u.]})+\hat{V}_{load[p.u.]}$$
+
+        \begin{itemize}
+
+          \item Note: $x_t$ is the transformer reactance, and $x$ is the line reactance
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item $Y_{bus}$: An $n\times n$ sparse, square matrix (where $n$ is the number of buses)
+
+    $$Y_{bus}=G+jB$$
+
+    \begin{itemize}
+
+      \item $Y_{bus}(i,j)\neq0$ only if bus $i$ and $j$ are connected
+
+      \item $Y_{bus}(i,i)=\sum$ admittances of all branches connected to at one end to bus $i$
+
+      \item Modifying $Y_{bus}$:
+
+        \begin{itemize}
+
+          \item Removing/adding a branch with admittance $y_n$ connected between $k$ and $m$ gives us (for added branch, subtract from off-diagonals and add to diagonals, and vice versa for removal):
+
+            $$Y_{bus}^{new}(k,m)\leftarrow Y_{bus}^{old}(k,m)\mp y_n$$
+            $$Y_{bus}^{new}(m,k)\leftarrow Y_{bus}^{old}(m,k)\mp y_n$$
+            $$Y_{bus}^{new}(k,k)\leftarrow Y_{bus}^{old}(k,k)\pm y_n$$
+            $$Y_{bus}^{new}(m,m)\leftarrow Y_{bus}^{old}(m,m)\pm y_n$$
+
+          \item Adding/removing a shunt with $y_n$ at $k$:
+
+            $$Y_{bus}^{new}(k,k)\leftarrow Y_{bus}^{old}(k,k)\pm y_n$$
+
+          \item Kron Reduction:
+
+            $$Y=\left[ \begin{matrix} Y_{11} & Y_{12}\\ Y_{21} & Y_{22} \end{matrix}\right]\left[ \begin{matrix} V_1\\V_2 \end{matrix}\right]=\left[ \begin{matrix} I\\0\end{matrix} \right]\to (Y_{11}-Y_{12}Y^{-1}_{22}Y_{21})V_1=I_1$$
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item Power Flow Problem
+
+    $$P_i(x)=V_i\sum_{k=1}^{n}V_{k}\left( G_{ik}\cos(\theta_{ik})+B_{ik}\sin(\theta_{ik}) \right)$$
+    $$Q_i(x)=V_i\sum_{k=1}^{n}V_{k}\left( G_{ik}\sin(\theta_{ik})-B_{ik}\cos(\theta_{ik}) \right)$$
+
+    \begin{itemize}
+
+      \item We may obtain (using the Newton-Raphsson method):
+
+        $$X^{k+1}=X^k-[J]^{-1}F(x^k)$$
+        $$X^T=[\underbrace{\theta_2,\theta_3,\cdots,\theta_n}_{n-1};\overbrace{V_{n_{PV}+2},\cdots,V_{n}}^{n_{PQ}}]$$
+
+        \begin{itemize}
+
+          \item We check the norm: if $||F(x)||<\varepsilon$ then stop
+
+        \end{itemize}
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+
