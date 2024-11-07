@@ -34,6 +34,7 @@
     * [**Lecture 12**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture12.pdf)
     * [**Lecture 13**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture13.pdf)
     * [**Lecture 14**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture14.pdf)
+    * [**Lecture 15**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Notes/Lecture15.pdf)
 * [**Homework**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/)
     * [**Homework 1**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/Homework1.pdf)
     * [**Homework 2**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Homework/Homework2.pdf)
