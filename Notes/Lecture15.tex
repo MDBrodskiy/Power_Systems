@@ -1,0 +1,187 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 15}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item Economic Dispatch (ED) Problem
+
+    \begin{itemize}
+
+      \item Given $NG$ committed generators, $P^{min}_{Gi}\leq P_{Gi}\leq P^{max}_{Gi}$, for $i=1,2,\cdots, NG$, with $S_{Di}$ at all system, buses
+
+      \item Find $P_{Gi}$ for $i=1,2,\cdots,NG$ that will minimize the total generation
+
+      \item Cost:
+
+        $$C_T=\sum_{i=1}^{NG} C_i\left( P_{Gi} \right)$$
+
+        \begin{itemize}
+
+          \item Subject to:
+
+            $$\sum_{i=1}^{NG}P_{Gi}=\sum_{i=i}^N P_{Di}+P_{buses}$$
+
+          \item Where $N$ is the number of buses
+
+          \item Line transmission capacity is subject to:
+
+            $$|P_{fk}|\leq P^{max}_{fk},\quad k=1,2,\cdots,L$$
+
+          \item Where $L$ refers to the number of lines
+
+        \end{itemize}
+
+      \item The generation cost can thus be expressed as:
+
+        $$C_i(P_{Gi})=\alpha_i+\beta_i P_{Gi}+\gamma_iP_{Gi}^2,\quad i=1,2,\cdots,NG$$
+
+        \begin{itemize}
+
+          \item We can minimize the cost (optimize) by using the Lagrangian method
+
+          \item We may form a Lagrangian as:
+
+            $$\mathcal{L}(x,\lambda)=f(x)-\lambda g(x)$$
+
+            \begin{itemize}
+
+              \item The $\lambda$ term is referred to as the Lagrange multiplier
+
+              \item We may then express a solution such that:
+
+                $$\left\{\begin{array}{ll} \dfrac{\partial\mathcal{L}(x,\lambda)}{\partial x}&=0\\\\\dfrac{\partial \mathcal{L}(x,\lambda)}{\partial\lambda}&= 0\end{array}$$
+
+            \end{itemize}
+
+        \end{itemize}
+
+    \end{itemize}
+    
+  \item Using the Lagrangian
+
+    \begin{itemize}
+
+      \item We apply the Lagrangian as follows:
+
+        $$\mathcal{L}(P_{Gi},\lambda)=\sum_{i=1}^{NG}C_i(P_{Gi})-\lambda\sum_{i=1}^{N}P_{Gi}-P_{D}$$
+
+      \item Taking the partial differentials, we obtain:
+
+        $$\frac{\partial\mathcal{L}}{\partial P_{Gi}}=\beta_i+2\gamma_iP_{Gi}-\lambda$$
+        $$\frac{\partial\mathcal{L}}{\partial \lambda}=\sum_{i=1}^N P_{Gi}-P_D$$
+
+      \item We set both of the above equal to zero, which lets us form:
+
+        $$\left[ \begin{matrix} 2\gamma_1 & \cdots & \cdots &  \cdots & -1\\ \vdots & 2\gamma_2 & & & -1\\ \vdots & & \ddots & & -1\\ \vdots & & & 2\gamma_{NG} & -1\\ 1 & 1 & 1 & 1 & 0\\\end{matrix} \right]\left[ \begin{matrix} P_{G1}\\P_{G2}\\\vdots\\ P_{GNG}\\ \lambda\end{matrix} \right]=\left[ \begin{matrix} -\beta_1\\ -\beta_{2}\\ \vdots\\ -\beta_{NG}\\ P_D\end{matrix} \right]$$
+
+      \item The physical interpretation of $\lambda$:
+
+        $$C_T=C_{T}^*+\Delta C_T=\sum_{i=1}^{NG}\left\{ C_i(P_{Gi}^*)+\frac{dC_i(P_{Gi})}{dP_{Gi}}\Delta P_{Gi} \right\}$$
+
+        $$\Delta C_T=\lambda\sum_{i=1}^{NG}\Delta P_{Gi}$$
+
+      \item This cost will be expressed in dollars per mega-watt
+
+      \item The penalty factor may be expressed as:
+
+        $$L_i\triangleq \frac{1}{1-\dfrac{\partial P_L}{\partial P_{Gi}}}$$
+
+      \item If all penalty factors are assumed to be equal to one, then the economic dispatch rule is assumed to be lossless
+
+    \end{itemize}
+
+  \item Computing the Loss Penalty Factors
+
+    \begin{itemize}
+
+      \item First, we write:
+
+        $$P_L=\sum_{i=1}^{N}P_i$$
+        $$P_i=P_{Gi}-P_{Di}$$
+
+        \begin{itemize}
+
+          \item Where $N$ is the number of buses
+
+        \end{itemize}
+
+      \item We can then write $\theta$ as:
+
+        $$\theta=\left[ \begin{matrix} \theta_2\\\vdots\\\vdots\\\theta_N \end{matrix}\right],\quad \theta_1=0^{\circ}$$
+
+      \item This gives us:
+
+        $$P_L(\theta)=P_i+\sum_{i=2}^{N}P_i$$
+        $$dP_L(\theta)=dP_i+\sum_{i=2}^{N}dP_i$$
+
+      \item We then let:
+
+        $$dP=\left[ \begin{matrix} dP_2\\\vdots\\\vdots\\dP_N\end{matrix} \right]$$
+        $$\frac{\partial P_1}{\partial \theta}=\left[ \begin{matrix} \partial P_1/\partial \theta_2\\\vdots\\\vdots\\\partial P_1/\partial \theta_N\end{matrix} \right]$$
+        $$d\theta=\left[ \begin{matrix} d\theta_2\\\vdots\\\vdots\\d\theta_N\end{matrix} \right]$$
+
+      \item We then know that $\dfrac{\partial P}{\partial \theta}$ is an $(N-1)\times(N-1)$ jacobian. This lets us write:
+
+        $$dP=\left[ \frac{\partial P}{\partial \theta} \right]^T\,d\theta$$
+    
+      \item We can then write:
+
+        $$dP_L=\left[ \frac{\partial P_1}{\partial \theta} \right]^T\left[ \frac{\partial P}{\partial \theta} \right]^{-1}dP=\beta\,dP$$
+        $$dP_L=\beta dP+\sum_{i=2}^N dP_i=(\beta_2+1)dP_2+(\beta_3+1)dP_3+\cdots+(\beta_N+2)dP_N$$
+
+      \item Ultimately, this lets us write:
+
+        $$L_i=-\frac{1}{\beta_i}$$
+
+    \end{itemize}
+
+  \item Steps of ED Calculation Accounting for Losses
+
+    \begin{enumerate}
+
+      \item Choose an initial dispatch $P_{G2}, P_{G3},\cdots,P_{GNG}$
+
+      \item Solve the power flow problem
+
+        \begin{itemize}
+
+          \item $P_{G1}\to\theta$
+
+        \end{itemize}
+
+      \item Calculate the loss penalty factors:
+
+        $$\beta=\left[ \frac{\partial P_1}{\partial\theta} \right]^{T}\left[ \frac{\partial P}{\partial \theta} \right]^{-1}$$
+        $$L_i=-\frac{1}{\beta_i}$$
+
+      \item Check $L_jIC_j=IC_1=\lambda$
+
+        \begin{itemize}
+
+          \item If $L_jIC_j>\lambda$, then $P_{Gi}\leftarrow P_{Gj}-\delta P$ — If $P_{Gj}<P_{Gj}^{min}$ set $P_{Gj}=P_{Gj}^{min}$
+
+          \item If $L_jIC_j<\lambda$, then $P_{Gi}\leftarrow P_{Gj}-\delta P$ — If $P_{Gj}<P_{Gj}^{max}$ set $P_{Gj}=P_{Gj}^{max}$
+            
+        \end{itemize}
+
+      \item Go back to step 2
+
+    \end{enumerate}
+
+\end{itemize}
+
+\end{document}
+
