@@ -1,0 +1,260 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Abur
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Homework 4}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Abur}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+    \begin{center}
+      \underline{Chapter 11}:
+    \end{center}
+
+    \setcounter{enumi}{7}
+
+  \item First, we need to find the incremental costs. This gives us:
+
+    $$IC_i=\frac{dC_i}{dP_{Gi}}$$
+
+    Which results in:
+
+    $$\left\{\begin{array}{ll} IC_1&= 8+.003P_{G1}\\IC_{2}&= 8+.001P_{G2}\\IC_{3}&= 7.5 + .002P_{G3}\end{array}$$
+
+      We want to find a point at which:
+
+      $$IC_{1}=IC_{2}=IC_{3}$$
+
+      This gives us:
+
+      $$8+.003P_{G1}=8+.001P_{G2}$$
+      $$3P_{G1}=P_{G2}$$
+
+      And:
+
+      $$7.5+.002P_{G3}=8+.001P_{G2}$$
+      $$P_{G3}=\frac{500+P_{G2}}{2}$$
+
+      We can then apply these equations to the three given cases:
+
+    \begin{enumerate}
+
+      \item At $500[\si{\mega\watt}]$:
+
+        $$P_{G1}+P_{G2}+P_{G3}=500$$
+
+        We substitute to get:
+
+        $$\frac{1}{3}P_{G2}+P_{G2}+\frac{500+P_{G2}}{2}=500$$
+        $$\frac{1}{3}P_{G2}+P_{G2}+\frac{1}{2}P_{G2}=250$$
+        $$\frac{11}{6}P_{G2}=250$$
+        $$\boxed{P_{G2}=136.36[\si{\mega\watt}]}$$
+
+        From our formulas, we may solve to get:
+
+        $$P_{G1}=\frac{1}{3}P_{G2}$$
+        $$\boxed{P_{G1}=45.455[\si{\mega\watt}]}$$
+
+        And finally, we find the last value:
+
+        $$P_{G3}=500-136.36-45.455$$
+        $$\boxed{P_{G3}=318.19[\si{\mega\watt}]}$$
+
+        This gives an optimal dispatch of:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 45.455\\P_{G2}&= 136.36\\P_{G3}&= 318.19\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$C_t=1450+8(45.455)+.0015(45.455)^2+8(136.36)+.0005(136.36)^2+$$
+        $$7.5(318.19)+.001(318.19)^2$$
+        $$\boxed{C_t=5,404.6\left[ \frac{\$}{\text{hr}} \right]}$$
+
+      \item At $1000[\si{\mega\watt}]$:
+
+        $$P_{G1}+P_{G2}+P_{G3}=500$$
+
+        We substitute to get:
+
+        $$\frac{1}{3}P_{G2}+P_{G2}+\frac{500+P_{G2}}{2}=1000$$
+        $$P_{G2}=\frac{6}{11}(750)$$
+        $$\boxed{P_{G2}=409.09[\si{\mega\watt}]}$$
+
+        Then we find $P_{G1}$:
+
+        $$P_{G1}=\frac{1}{3}P_{G2}$$
+        $$\boxed{P_{G1}=136.36[\si{\mega\watt}]}$$
+
+        And finally, we find the last value:
+
+        $$P_{G3}=1000-409.09-136.36$$
+        $$\boxed{P_{G3}=454.55[\si{\mega\watt}]}$$
+
+        This gives an optimal dispatch of:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 136.36\\P_{G2}&= 409.09\\P_{G3}&= 454.55\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$C_t=1450+8(136.36)+.0015(136.36)^2+8(409.09)+.0005(409.09)^2+$$
+        $$7.5(454.55)+.001(454.55)^2$$
+        $$\boxed{C_t=9,540.9\left[ \frac{\$}{\text{hr}} \right]}$$
+
+      \item At $2000[\si{\mega\watt}]$:
+
+        $$P_{G1}+P_{G2}+P_{G3}=500$$
+
+        We substitute to get:
+
+        $$\frac{1}{3}P_{G2}+P_{G2}+\frac{500+P_{G2}}{2}=2000$$
+        $$P_{G2}=\frac{6}{11}(1750)$$
+        $$\boxed{P_{G2}=954.55[\si{\mega\watt}]}$$
+
+        Then we find $P_{G1}$:
+
+        $$P_{G1}=\frac{1}{3}P_{G2}$$
+        $$\boxed{P_{G1}=318.18[\si{\mega\watt}]}$$
+
+        And finally, we find the last value:
+
+        $$P_{G3}=2000-954.55-318.18$$
+        $$\boxed{P_{G3}=727.27[\si{\mega\watt}]}$$
+
+        This gives an optimal dispatch of:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 318.18\\P_{G2}&= 954.55\\P_{G3}&= 727.27\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$C_t=1450+8(318.18)+.0015(318.18)^2+8(954.55)+.0005(954.55)^2+$$
+        $$7.5(727.27)+.001(727.27)^2$$
+        $$\boxed{C_t=18,223\left[ \frac{\$}{\text{hr}} \right]}$$
+
+    \end{enumerate}
+
+  \item When the loads are shared evenly, we know that:
+
+    $$P_{G1}=P_{G2}=P_{G3}=\frac{P_D}{3}$$
+
+    \begin{enumerate}
+
+      \item At $500[\si{\mega\watt}]$:
+
+        $$P_{G1}=P_{G2}=P_{G3}=166.67[\si{\mega\watt}]$$
+
+        This gives a cost of:
+
+        $$C_t=1450+23.5(166.67)+.003(318.18)^2$$
+        $$\boxed{C_t=5,450\left[ \frac{\$}{\text{hr}} \right]}$$
+
+        This gives a cost increase of:
+
+        $$\Delta C=5450-5404.6$$
+        $$\boxed{\Delta C=45.4\left[ \frac{\$}{\text{hr}} \right]}$$
+
+      \item At $1000[\si{\mega\watt}]$:
+
+        $$P_{G1}=P_{G2}=P_{G3}=333.33[\si{\mega\watt}]$$
+
+        This gives a cost of:
+
+        $$C_t=1450+23.5(333.33)+.003(333.33)^2$$
+        $$\boxed{C_t=9,616.6\left[ \frac{\$}{\text{hr}} \right]}$$
+
+        This gives a cost increase of:
+
+        $$\Delta C=9616.6-9540.9$$
+        $$\boxed{\Delta C=75.682\left[ \frac{\$}{\text{hr}} \right]}$$
+
+      \item At $2000[\si{\mega\watt}]$:
+
+        $$P_{G1}=P_{G2}=P_{G3}=666.67[\si{\mega\watt}]$$
+
+        This gives a cost of:
+
+        $$C_t=1450+23.5(666.67)+.003(666.67)^2$$
+        $$\boxed{C_t=18,450\left[ \frac{\$}{\text{hr}} \right]}$$
+
+        This gives a cost increase of:
+
+        $$\Delta C=18,450-18,223$$
+        $$\boxed{\Delta C=227.09\left[ \frac{\$}{\text{hr}} \right]}$$
+
+    \end{enumerate}
+
+  \item
+
+    \begin{enumerate}
+
+      \item Since the first generator must be producing at least $50[\si{\mega\watt}]$, we set it to its minimum value and continue to find $P_{G2}$ and $P_{G3}$:
+
+        $$P_{G2}+P_{G3}=450$$
+
+        This lets us find:
+
+        $$P_{G2}=\frac{2}{3}(200)$$
+        $$P_{G2}=133.33[\si{\mega\watt}]$$
+
+        We then find:
+
+        $$P_{G3}=133.33(.5)+250$$
+        $$\boxed{P_{G3}=316.67[\si{\mega\watt}]}$$
+
+        This gives an optimal dispatch of:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 50\\P_{G2}&= 133.33\\P_{G3}&= 316.67\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$C_t=1450+8(50)+.0015(50)^2+8(133.33)+.0005(133.33)^2+$$
+        $$7.5(316.67)+.001(316.67)^2$$
+        $$\boxed{C_t=5,404.6\left[ \frac{\$}{\text{hr}} \right]}$$
+
+        We may observe that the cost remains the same.
+
+      \item At $1000[\si{\mega\watt}]$:
+
+        We may observe that, because all of the generation is already within limits, the dispatch would remain the same as in problem 8:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 136.36\\P_{G2}&= 409.09\\P_{G3}&= 454.55\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$\boxed{C_t=9,540.9\left[ \frac{\$}{\text{hr}} \right]}$$
+
+      \item We may observe that the second generator is producing beyond its limitations. This makes us cap the value at 800, which gives us:
+
+        $$P_{G1}+P_{G3}=1200$$
+        $$\frac{5}{2}P_{G1}=950$$
+        $$\boxed{P_{G1}=380[\si{\mega\watt}]}$$
+
+        We then find:
+
+        $$P_{G3}=250+1.5(380)$$
+        $$\boxed{P_{G3}=820[\si{\mega\watt}]}$$
+
+        The optimal dispatch thus becomes:
+
+        $$\boxed{\left\{\begin{array}{ll} P_{G1}&= 380\\P_{G2}&= 800\\P_{G3}&= 820\end{array}[\si{\mega\watt}]}$$
+
+        And a cost of:
+
+        $$C_t=1450+8(380)+.0015(380)^2+8(800)+.0005(800)^2+$$
+        $$7.5(820)+.001(820)^2$$
+        $$\boxed{C_t=18,249\left[ \frac{\$}{\text{hr}} \right]}$$
+
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
