@@ -48,6 +48,7 @@
     * [**Lab 4b**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab4b.pdf)
     * [**Lab 5**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab5.pdf)
     * [**Lab 6a**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab6a.pdf)
+    * [**Lab 6b**](https://github.com/MDBrodskiy/Power_Systems/tree/master/Labs/Lab6b.pdf)
 
 <!--
   * [**Chapter 1**](#Notes/Chapter\ 1)
