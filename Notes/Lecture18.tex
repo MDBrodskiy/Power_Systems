@@ -1,0 +1,263 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written By Michael Brodskiy
+% Class: Power Systems Analysis
+% Professor: A. Ali
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Includes.tex}
+
+\title{Lecture 18}
+\date{\today}
+\author{Michael Brodskiy\\ \small Professor: A. Ali}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+  \item For single-phase systems, power oscillates at $2\pi f$ for voltage and current at $f$
+
+  \item For a balanced 3-phase system, the power is constant
+
+  \item For power factor correction, we add a shunt capacitor at the load
+
+  \item Power provided at the load may be written as (with $\theta_{12}$ as the angle difference between the two points):
+
+    $$P_l=\frac{V_1V_2}{x}\sin\left( \theta_{12} \right)$$
+
+  \item We know:
+
+    $$Y_{bus}\hat{V}_{bus}=\hat{I}_{bus}$$
+
+    \begin{itemize}
+
+      \item With:
+
+        $$\hat{I}_{bus}=\hat{I}_{G_k}+\hat{I}_{D_k}$$
+
+      \item The admittance matrix, $Y_{bus}=G+jB$, is:
+
+        \begin{itemize}
+
+          \item Sparse
+
+          \item Square ($n\times n$), with $n$ as the number of buses
+
+          \item Symmetric (without phase shifters)
+
+          \item Complex
+
+        \end{itemize}
+
+      \item The impedance matrix is:
+
+        $$Z_{bus}=Y_{bus}^{-1}$$
+
+        \begin{itemize}
+
+          \item Full
+
+          \item Square
+
+          \item Complex
+
+        \end{itemize}
+
+    \end{itemize}
+
+  \item The incidence matrix $A$ bus to branch $n\times l$
+
+    $$A_{ij}=\left\{  \begin{array}{ll} 1,& i\text{ is sending end of }j\\ -1,&i\text{ is receiving end of }j\\ 0,&\text{Otherwise}\end{array}$$
+
+      \begin{itemize}
+
+        \item From this, we may get:
+
+          $$Y_{bus}=A Y_p A^T$$
+
+        \item $Y_p$ is the primitive admittance matrix, consisting only of diagonal terms with $z_i$ being the impedance of branch $i$
+
+      \end{itemize}
+
+    \item $Y_{bus}$ by inspection
+
+      \begin{itemize}
+
+        \item $Y_{bus}(i,i)$ is the sum of the admittances of all branches incident to $i$, including the branches connecting to ground
+
+        \item $Y_{bus}(i,j)$ is the admittance of the branch connecting $i$ to $j$
+
+      \end{itemize}
+
+    \item Complex Power
+
+      \begin{itemize}
+
+        \item We know that:
+
+          $$I_{bus}=V_{bus}Y_{bus}$$
+
+        \item This gives us:
+
+          $$S_k=\hat{V}_{bus}(k)\left[ \hat{I}_{bus}(k) \right]^{*}$$
+
+        \item With the current expressed as:
+
+          $$\hat{I}_{bus}(k)^* =\sum_{m=1}^nY_{bus}^*(k,m)\hat{V}_m^*$$
+
+        \item Expanding $Y_{bus}$, we may obtain the power components as:
+
+          $$P_k=V_k\sum_{m=1}^nV_m\left( G_{km}\cos(\theta_{km})+B_{km}\sin(\theta_{km}) \right)$$
+          $$Q_k=V_k\sum_{m=1}^nV_m\left( G_{km}\sin(\theta_{km})-B_{km}\cos(\theta_{km}) \right)$$
+
+      \end{itemize}
+
+    \item Bus Types
+
+      \begin{itemize}
+
+        \item Slack Bus
+
+          \begin{itemize}
+
+            \item Known: $V,\theta$
+
+            \item Unknown: $P,Q$
+
+            \item Quantity: 1
+
+          \end{itemize}
+
+        \item $PV$ Bus
+
+          \begin{itemize}
+
+            \item Known: $V,P$
+
+            \item Unknown: $Q,\theta$
+
+            \item Quantity: $n_{PV}$
+
+          \end{itemize}
+
+        \item $PQ$ Bus
+
+          \begin{itemize}
+
+            \item Known: $P,Q$
+
+            \item Unknown: $V,\theta$
+
+            \item Quantity: $n_{PQ}$
+
+          \end{itemize}
+
+      \end{itemize}
+
+    \item Mismatch Vector
+
+      \begin{itemize}
+
+        \item We can form a vector as:
+
+          $$X=[\underbrace{\theta_2,\theta_3,\cdots,\theta_n}_{n-1}|\overbrace{V_{n_{PV}+2},\cdots,V_n}^{n_{PQ}}]$$
+          '
+        \item Initialize all of angles as zero and the voltages as one
+
+        \item From here, we can make the mismatch vector as:
+
+          $$F(X)=\left[ \begin{matrix} P_2(X)-(P_{G_2}-P_{D_2})\\P_3(X)-(P_{G_3}-P_{D_3})\\\vdots\\P_n(X)-(P_{G_n}-P_{D_n})\\\\\hline\\ Q_{n_{PV}+2}(X)-(Q_G-Q_D)\\\vdots\\ Q_n(X)-(Q_{G_n}-Q_{D_n}) \end{matrix}\right]$$
+
+        \item Using the Newton-Raphsson method, we solve using:
+
+          $$X^{k+1}=X^k-[J]^{-1}F(x^k)$$
+
+        \item Equations 10.40 and 10.41 from the book help us generate the Jacobian matrix
+
+        \item Line loss may be calculated as: $P_{G_i}-P_{D_i}$
+
+        \item Line loss from $k$ to $m$ may be obtained using: $P_{km}+P_{mk}$
+
+        \item Slack bus by default is bus 1, but what happens if we change the slack bus to $k$?
+
+          \begin{itemize}
+
+            \item $\theta^{new}_j=\theta^{old}_j-\theta^{old}_k$
+
+            \item For a PV bus: $P_{G_i}=P_i^{old}$, $|V_i|=V_i^{old}$, and $V_k=V_k^{old}$
+
+              \begin{itemize}
+
+                \item Note that only the angle changes
+
+              \end{itemize}
+
+          \end{itemize}
+
+      \end{itemize}
+
+    \item Synchronous Condenser
+
+      \begin{itemize}
+
+        \item A voltage source with $\hat{E}_f=E_f\angle{\delta}=\hat{V}_t+jX_s\hat{I}_a$
+
+        \item We assume $\hat{V}_t=V_t\angle 0$
+
+      \end{itemize}
+
+    \item Primary Control
+
+      \begin{itemize}
+
+        \item If frequency drops, power increases and vice versa
+
+      \end{itemize}
+
+    \item Secondary Control (Area Control Error — ACE)
+
+      \begin{itemize}
+
+        \item ACE $=\beta_i\Delta P_{tie}+k\Delta\omega_i$
+
+        \item Want to minimize ACE
+
+      \end{itemize}
+
+    \item Economic Dispatch
+
+      \begin{itemize}
+
+        \item $C_i(P_{G_i})=\alpha_i+\beta_iP_{G_i}+\gamma_iP_{G_i}^2$
+
+        \item We may write (for a lossless system):
+
+          $$\sum_{i=1}^{NG}P_{G_i}-P_D=0$$
+
+        \item This gives us a solution as:
+
+          $$\left[ \begin{matrix} 2\gamma_1 & \cdots & \cdots & \cdots & -1\\ \vdots & 2\gamma_2 & 0 & 0 & -1\\ \vdots & 0 & \ddots & 0 & -1\\ \vdots & 0 & 0 & 2\gamma_{NG} & -1\\ 1 & 1 & 1 & 1 &0\end{matrix} \right]\left[ \begin{matrix} P_{G_1}\\ P_{G_2}\\ \vdots \\ P_{G_{NG}}\\ \lambda \end{matrix}\right]=\left[ \begin{matrix} -\beta_1\\-\beta_2\\\vdots\\ -\beta_{NG}\\P_D\end{matrix} \right]$$
+
+        \item With power limits:
+
+          \begin{itemize}
+
+            \item If $P_{G_i}>P_{G_i}^{max}\to P_{G_i}=P_{G_i}^{max}$ 
+
+            \item If $P_{G_i}<P_{G_i}^{min}\to P_{G_i}=P_{G_i}^{min}$ 
+
+            \item Then, remove the row corresponding to $i$
+
+            \item Re-solve using $P_D=P_D-P_{G_i}$
+
+            \item System $\lambda$ versus $IC_i<\lambda$ if $P_{G_i}$ is at $P_{G_i}^{max}$, and $IC_{i}>\lambda$ if $P_{G_i}$ is at $P_{G_i}^{min}$
+
+          \end{itemize}
+
+      \end{itemize}
+      
+\end{itemize}
+
+\end{document}
+
